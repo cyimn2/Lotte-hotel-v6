@@ -1,7 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" translate="no" class="notranslate">
 <head>
 <meta charset="utf-8">
+<!-- keep browser auto-translate off: it rewrites the per-letter animation spans (o→오, a→어) -->
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lotte Hotels &amp; Resorts — Warm Emotion, Beautiful Moment</title>
 <meta name="description" content="고객의 모든 순간을 함께하는 롯데호텔 & 리조트">
@@ -9,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Old+Standard+TT&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=16">
 </head>
 <body class="s-0 g-intro">
 
@@ -20,7 +22,7 @@
 
     <!-- moment image panel (right half → full bleed on exit) -->
     <div class="moment-panel" aria-hidden="true">
-      <div class="m-img anim bslide" data-steps="1"><img src="assets/moment-vase.jpg" alt=""><i style="background:rgba(0,0,0,.08)"></i></div>
+      <div class="m-img anim bslide" data-steps="1"><img src="assets/moment-vase.jpg" alt="" style="top:auto;bottom:0;height:145.46%;object-position:50% 100%"><i style="background:rgba(0,0,0,.08)"></i></div>
       <div class="m-img anim bslide" data-steps="2"><img src="assets/moment-bed.jpg" alt=""><i style="background:rgba(0,0,0,.2)"></i></div>
       <div class="m-img anim bslide" data-steps="3-4"><img src="assets/exp-resort.png" alt="" style="object-position:62% 50%"></div>
     </div>
@@ -475,6 +477,6 @@
   </nav>
 </div>
 
-<script src="js/main.js?v=14"></script>
+<script src="js/main.js?v=16"></script>
 </body>
 </html>
