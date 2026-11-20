@@ -801,3 +801,8 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .rsv-count { position: absolute; left: 80px; top: 64px; width: 241px; height: 46px; display: flex; align-items: center; justify-content: space-between; }
 .rsv-count span { font-family: "Manuale", serif; font-weight: 300; font-size: 26px; line-height: 1; }
 .is-dining .rsv-promo { margin-top: 51px; }
+
+/* V6: menu drawer — utility links pinned to the top edge, legal links pinned to the bottom edge
+   (they used to follow the 1920x1080 frame, so on taller screens they drifted toward the middle) */
+.mn-util, .mn-account { top: 41px; }
+.mn-legal { top: auto; bottom: 44px; }
