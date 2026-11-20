@@ -700,3 +700,9 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .x-img img { left: var(--l4); top: var(--t4); width: var(--w4); height: var(--h4);
   transition: transform 1.2s var(--ease), left .9s cubic-bezier(.65,0,.35,1), top .9s cubic-bezier(.65,0,.35,1), width .9s cubic-bezier(.65,0,.35,1), height .9s cubic-bezier(.65,0,.35,1); }
 .x-col.is-center .x-img img { left: var(--l5); top: var(--t5); width: var(--w5); height: var(--h5); }
+
+/* ================= V6 — clean refresh =================
+   Until the first scene is set, nothing that belongs to a later scene may paint: the brand copy, lists and
+   cards used to flash faintly over the intro for about a second after a reload (their raw, un-split text). */
+.booting .zone-dark, .booting .page { visibility: hidden; }
+.stage .anim:not(.on):not(.off) { opacity: 0; }

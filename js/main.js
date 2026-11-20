@@ -150,6 +150,7 @@
     cur = next;
 
     root.style.setProperty('--enter', enterDelay(prev, next) + 's');
+    if (prev < 0) requestAnimationFrame(() => root.classList.remove('booting'));
     body.className = body.className.replace(/\b(s-\d+|g-\w+)\b/g, '').trim();
     body.classList.add('s-' + next,
       next === 0 ? 'g-intro' : next <= 3 ? 'g-moment' : next <= 7 ? 'g-brand' : 'g-pages');
