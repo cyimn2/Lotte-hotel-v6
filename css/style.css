@@ -831,3 +831,7 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .b-scroll:hover i, .b-scroll.dragging i { width: 8px; background: #d8d1c8; }
 .b-scroll.dragging { cursor: grabbing; }
 .b-list { overscroll-behavior: contain; }
+
+/* V6: activity thumbnails zoom further on hover (1.05 -> 1.15), slow ease in, quicker ease back */
+.x-col .x-img img { transform-origin: 50% 50%; }
+.x-col:hover .x-img img { transform: scale(1.15); }
