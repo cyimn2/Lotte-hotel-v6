@@ -193,7 +193,7 @@
   const isMobile = () => body.classList.contains('is-mobile');
   window.addEventListener('wheel', e => {
     if (isMobile()) return; // mobile = native scroll page
-    if (body.classList.contains('menu-open')) return;
+    if (isOpen()) return;
     const list = e.target.closest && e.target.closest('.b-list');
     if (list && list.classList.contains('on') && list.scrollHeight > list.clientHeight + 2) {
       const atTop = list.scrollTop <= 0, atBottom = list.scrollTop + list.clientHeight >= list.scrollHeight - 1;
@@ -219,7 +219,7 @@
     if (!tList) e.preventDefault(); // stop pull-to-refresh / rubber-band
   }, { passive: false });
   window.addEventListener('touchend', e => {
-    if (ty === null || body.classList.contains('menu-open')) { ty = null; return; }
+    if (ty === null || isOpen()) { ty = null; return; }
     const dy = ty - e.changedTouches[0].clientY;
     const dx = tx - e.changedTouches[0].clientX;
     ty = null;
@@ -236,8 +236,8 @@
 
   window.addEventListener('keydown', e => {
     if (isMobile()) return;
-    if (e.key === 'Escape') return toggleMenu(false);
-    if (body.classList.contains('menu-open')) return;
+    if (e.key === 'Escape') { toggleMenu(false); toggleRsv(false); return; }
+    if (isOpen()) return;
     if (['ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
     else if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prevStep(); }
     else if (e.key === 'Home') go(0);
@@ -262,24 +262,51 @@
   }));
   function resetLists() { lists.forEach(l => { if (!l.classList.contains('on')) l.scrollTop = 0; }); thumb.style.top = '30px'; }
 
-  // menu
+  // menu (left drawer) & reservation (right drawer) — Figma 183:831
   const ham = document.querySelector('.ham');
   const menu = document.querySelector('.menu');
-  menu.querySelectorAll('li').forEach((li, i) => li.style.setProperty('--i', i));
+  const rsv = document.querySelector('.rsv');
+  // every visible block inside a drawer blurs in one after another
+  const markItems = (root, sel) => root.querySelectorAll(sel).forEach((el, i) => { el.classList.add('dr-item'); el.style.setProperty('--i', i); });
+  markItems(menu, '.mn-util li, .mn-account li, .mn-main li, .mn-legal li');
+  markItems(rsv, '.rsv-weather, .rsv-loc, .rsv-tabs, .rsv-body > *');
+  const isOpen = () => body.classList.contains('menu-open') || body.classList.contains('rsv-open');
   function toggleMenu(open = !body.classList.contains('menu-open')) {
+    if (open) toggleRsv(false);
     body.classList.toggle('menu-open', open);
     ham.setAttribute('aria-expanded', open);
-    ham.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
     menu.setAttribute('aria-hidden', !open);
   }
-  ham.addEventListener('click', () => toggleMenu());
+  function toggleRsv(open = !body.classList.contains('rsv-open')) {
+    if (open && body.classList.contains('menu-open')) toggleMenu(false);
+    body.classList.toggle('rsv-open', open);
+    rsv.setAttribute('aria-hidden', !open);
+  }
+  ham.addEventListener('click', () => toggleMenu(true));
   menu.querySelector('.menu-dim').addEventListener('click', () => toggleMenu(false));
-  document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', e => {
+  menu.querySelector('.mn-close').addEventListener('click', () => toggleMenu(false));
+  rsv.querySelector('.rsv-dim').addEventListener('click', () => toggleRsv(false));
+  rsv.querySelector('.rsv-close').addEventListener('click', () => toggleRsv(false));
+  document.querySelectorAll('.stage [data-open-rsv]').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
-    toggleMenu(false);
-    locked = false;
-    setTimeout(() => go(+a.dataset.go), body.classList.contains('menu-open') ? 350 : 0);
+    const fromMenu = body.classList.contains('menu-open');
+    if (fromMenu) toggleMenu(false);
+    setTimeout(() => toggleRsv(true), fromMenu ? 450 : 0);
   }));
+  // 객실 / 다이닝 switch: the pill slides between the two
+  const tabs = rsv.querySelector('.rsv-tabs');
+  tabs.querySelectorAll('.rsv-tab').forEach((t, i) => t.addEventListener('click', () => {
+    tabs.classList.toggle('dining', i === 1);
+    tabs.querySelectorAll('.rsv-tab').forEach((x, k) => { x.classList.toggle('is-on', k === i); x.setAttribute('aria-selected', k === i); });
+  }));
+  document.querySelectorAll('.stage [data-go]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const wasOpen = isOpen();
+    toggleMenu(false); toggleRsv(false);
+    locked = false;
+    setTimeout(() => go(+a.dataset.go), wasOpen ? 450 : 0);
+  }));
+  menu.querySelectorAll('a:not([data-go]):not([data-open-rsv])').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
   /* ---------- 8. start once fonts are ready (no flash of fallback glyphs) ---------- */
   /* ---------- 8b. activity slider: cards loop, leaving card blurs out, arriving card blurs in ---------- */

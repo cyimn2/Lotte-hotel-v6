@@ -9,9 +9,9 @@
 <meta name="description" content="고객의 모든 순간을 함께하는 롯데호텔 & 리조트">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Old+Standard+TT&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manuale:wght@300;400&family=Marcellus&family=Old+Standard+TT&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
-<link rel="stylesheet" href="css/style.css?v=17">
+<link rel="stylesheet" href="css/style.css?v=18">
 </head>
 <body class="s-0 g-intro">
 
@@ -239,7 +239,7 @@
       <span class="cg" data-g="h"></span><span class="cc">:</span><span class="cg" data-g="m"></span><span class="cc">:</span><span class="cg" data-g="s"></span>
     </div>
 
-    <a href="#" class="cta">
+    <a href="#" class="cta" data-open-rsv>
       <span>지금 예약을<br>원하시나요?</span>
       <i class="cta-arrow"></i>
     </a>
@@ -291,25 +291,69 @@
     </footer>
   </section>
 
-  <!-- ============ MENU ============ -->
+  <!-- ============ MENU (Figma 179:909 · left drawer) ============ -->
   <nav class="menu" aria-label="전체 메뉴" aria-hidden="true">
     <div class="menu-dim"></div>
     <div class="menu-panel">
-      <ul class="menu-util">
-        <li><a href="#">호텔찾기</a></li><li><a href="#">멤버십</a></li><li><a href="#">예약조회</a></li><li><a href="#">로그인</a></li><li><a href="#">회원가입</a></li>
+      <ul class="mn-util">
+        <li><a href="#" data-go="0">홈으로</a></li><li><a href="#">호텔찾기</a></li><li><a href="#" data-go="9">리워즈</a></li><li><a href="#">예약조회</a></li>
       </ul>
-      <ol class="menu-moments">
-        <li><a href="#" data-go="1"><em>01</em>moments</a></li>
-        <li><a href="#" data-go="4"><em>02</em>our hotels</a></li>
-        <li><a href="#" data-go="8"><em>03</em>package &amp; offers</a></li>
-        <li><a href="#" data-go="9"><em>04</em>rewards</a></li>
-        <li><a href="#" data-go="10"><em>05</em>experience</a></li>
-      </ol>
-      <ul class="menu-main">
-        <li><a href="#">객실예약</a></li><li><a href="#">다이닝 예약</a></li><li><a href="#">스페셜 오퍼</a></li><li><a href="#">웨딩&amp;컨벤션</a></li><li><a href="#">e-SHOP</a></li><li><a href="#">드라이브 스루</a></li><li><a href="#">L VIBES</a></li>
+      <ul class="mn-account">
+        <li><a href="#">로그인</a></li><li><a href="#">회원가입</a></li>
       </ul>
+      <ul class="mn-main">
+        <li><a href="#" data-go="4">brand</a></li>
+        <li><a href="#" data-open-rsv>reservation</a></li>
+        <li><a href="#">dining reservation</a></li>
+        <li><a href="#" data-go="8">special Offer</a></li>
+        <li><a href="#">weddings &amp; conventions</a></li>
+        <li><a href="#">drive through</a></li>
+        <li><a href="#" data-go="9">membership</a></li>
+        <li><a href="#">e-SHOP</a></li>
+      </ul>
+      <ul class="mn-legal">
+        <li><a href="#">개인정보 처리방침</a></li><li><a href="#">이용약관</a></li><li><a href="#">통합숙박권 예약</a></li><li><a href="#">임직원</a></li><li><a href="#">사이트맵</a></li>
+      </ul>
+      <button type="button" class="dr-close mn-close" aria-label="메뉴 닫기"><i></i><i></i></button>
     </div>
   </nav>
+
+  <!-- ============ RESERVATION (Figma 182:3262 · right drawer) ============ -->
+  <aside class="rsv" aria-label="객실 예약" aria-hidden="true">
+    <div class="rsv-dim"></div>
+    <div class="rsv-panel">
+      <div class="rsv-weather">
+        <span class="rsv-temp">24</span><img class="rsv-deg" src="assets/rsv-degree.svg" alt=""><img class="rsv-rain" src="assets/rsv-rain.svg" alt="비">
+      </div>
+      <p class="rsv-loc">서울시 역삼동 <img src="assets/rsv-target.svg" alt=""></p>
+      <div class="rsv-tabs" role="tablist">
+        <span class="rsv-track"></span><span class="rsv-pill"></span>
+        <button type="button" class="rsv-tab is-on" role="tab" aria-selected="true">객실</button>
+        <button type="button" class="rsv-tab" role="tab" aria-selected="false">다이닝</button>
+      </div>
+      <div class="rsv-body">
+        <h2 class="rsv-hotel">더그랜드롯데 서울</h2>
+        <div class="rsv-dates">
+          <span class="rsv-lbl rsv-in">체크인</span><span class="rsv-lbl rsv-out">체크아웃</span>
+          <div class="rsv-row">
+            <span class="rsv-date">03/24<small>금</small></span><i class="rsv-sep"></i>
+            <span class="rsv-nights">2박</span><i class="rsv-sep"></i>
+            <span class="rsv-date">03/26<small>월</small></span>
+          </div>
+        </div>
+        <div class="rsv-guests">
+          <div><span class="rsv-lbl">객실수</span><b>1</b></div><i class="rsv-sep tall"></i>
+          <div><span class="rsv-lbl">성인</span><b>3</b></div><i class="rsv-sep tall"></i>
+          <div><span class="rsv-lbl">어린이</span><b>2</b></div>
+        </div>
+        <a href="#" class="rsv-promo">프로모션코드</a>
+        <button type="button" class="rsv-search">검색하기</button>
+        <p class="rsv-kw-title">혹시 이런 키워드는 어떤가요?</p>
+        <ul class="rsv-kw"><li>휴식</li><li>발렌타인</li><li>설캉스</li><li>쇼핑</li><li>이벤트</li></ul>
+      </div>
+      <button type="button" class="dr-close rsv-close" aria-label="예약 닫기"><i></i><i></i></button>
+    </div>
+  </aside>
 </div>
 
 <!-- =====================================================================
@@ -477,6 +521,6 @@
   </nav>
 </div>
 
-<script src="js/main.js?v=17"></script>
+<script src="js/main.js?v=18"></script>
 </body>
 </html>
