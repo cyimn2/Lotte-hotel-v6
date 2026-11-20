@@ -806,3 +806,11 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
    (they used to follow the 1920x1080 frame, so on taller screens they drifted toward the middle) */
 .mn-util, .mn-account { top: 41px; }
 .mn-legal { top: auto; bottom: 44px; }
+
+/* V6: reservation "검색하기" uses the same hover as "리워즈 가입하기": a darker fill wipes in from the left
+   and leaves to the right; the label sits above it */
+.rsv-search { position: relative; overflow: hidden; }
+.rsv-search:hover { background: rgba(0,0,0,.2); }
+.rsv-search::before { content: ""; position: absolute; inset: 0; background: #2b241f; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+.rsv-search:hover::before, .rsv-search:focus-visible::before { transform: scaleX(1); transform-origin: left; }
+.rsv-search span { position: relative; }
