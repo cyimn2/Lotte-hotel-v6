@@ -814,3 +814,15 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .rsv-search::before { content: ""; position: absolute; inset: 0; background: #2b241f; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
 .rsv-search:hover::before, .rsv-search:focus-visible::before { transform: scaleX(1); transform-origin: left; }
 .rsv-search span { position: relative; }
+
+/* V6: one hover for every button — a fill wipes in from the left (0.5s) and leaves to the right.
+   Same motion as "리워즈 가입하기"; only the fill colour follows each button's surface. */
+.o-btn, .f-go { overflow: hidden; isolation: isolate; }
+.o-btn::before, .f-go::before { content: ""; position: absolute; inset: 0; z-index: -1; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+.o-btn:hover::before, .f-go:hover::before, .o-btn:focus-visible::before, .f-go:focus-visible::before { transform: scaleX(1); transform-origin: left; }
+.o-btn::before { background: #5e5148; }
+.o-btn:hover { background: #857669; }
+.f-go::before { background: #000; }
+.f-go { transition: color .5s var(--ease); }
+.b-btn { isolation: isolate; transition: color .5s var(--ease); }
+.r-btn:focus-visible::before, .b-btn:focus-visible::after { transform: scaleX(1); transform-origin: left; }
