@@ -246,9 +246,6 @@ body:not(.s-0) .cta-box { opacity: 1; transform: none; }
   font-size: 16px; line-height: 1; color: #fff;
   background: rgba(0,0,0,.1); border: 1px solid rgba(255,255,255,.2);
 }
-.b-btn::after { content: ""; position: absolute; inset: -1px; background: #fff; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); z-index: -1; }
-.b-btn:hover { color: #222; }
-.b-btn:hover::after { transform: scaleX(1); transform-origin: left; }
 
 .b-list {
   position: absolute; left: 1243px; top: 236px; width: 150px; height: 691px;
@@ -824,8 +821,7 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .o-btn:hover { background: #857669; }
 .f-go::before { background: #000; }
 .f-go { transition: color .5s var(--ease); }
-.b-btn { isolation: isolate; transition: color .5s var(--ease); }
-.r-btn:focus-visible::before, .b-btn:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.r-btn:focus-visible::before { transform: scaleX(1); transform-origin: left; }
 
 /* V6: hotel-list scroll bar grows on hover so it is easy to grab; drag it or click the track */
 .b-scroll { cursor: pointer; touch-action: none; transition: width .3s var(--ease), left .3s var(--ease), background .3s ease; }
