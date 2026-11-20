@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manuale:wght@300;400&family=Marcellus&family=Old+Standard+TT&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
-<link rel="stylesheet" href="css/style.css?v=18">
+<link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body class="s-0 g-intro">
 
@@ -331,7 +331,7 @@
         <button type="button" class="rsv-tab is-on" role="tab" aria-selected="true">객실</button>
         <button type="button" class="rsv-tab" role="tab" aria-selected="false">다이닝</button>
       </div>
-      <div class="rsv-body">
+      <div class="rsv-body is-room is-on">
         <h2 class="rsv-hotel">더그랜드롯데 서울</h2>
         <div class="rsv-dates">
           <span class="rsv-lbl rsv-in">체크인</span><span class="rsv-lbl rsv-out">체크아웃</span>
@@ -347,6 +347,20 @@
           <div><span class="rsv-lbl">어린이</span><b>2</b></div>
         </div>
         <a href="#" class="rsv-promo">프로모션코드</a>
+        <button type="button" class="rsv-search">검색하기</button>
+        <p class="rsv-kw-title">혹시 이런 키워드는 어떤가요?</p>
+        <ul class="rsv-kw"><li>휴식</li><li>발렌타인</li><li>설캉스</li><li>쇼핑</li><li>이벤트</li></ul>
+      </div>
+      <!-- dining tab (Figma 184:836) -->
+      <div class="rsv-body is-dining" aria-hidden="true">
+        <h2 class="rsv-hotel">다이닝을 선택해 주세요</h2>
+        <div class="rsv-dates rsv-party">
+          <span class="rsv-lbl" style="left:74px">성인</span><span class="rsv-lbl rsv-c" style="left:201.5px">어린이</span><span class="rsv-lbl rsv-c" style="left:315.5px">유아</span>
+          <div class="rsv-count">
+            <span>2</span><i class="rsv-sep"></i><span>2</span><i class="rsv-sep"></i><span>0</span>
+          </div>
+        </div>
+        <a href="#" class="rsv-promo">리워즈 회원가입하고 다양한 혜택을 받아보세요.</a>
         <button type="button" class="rsv-search">검색하기</button>
         <p class="rsv-kw-title">혹시 이런 키워드는 어떤가요?</p>
         <ul class="rsv-kw"><li>휴식</li><li>발렌타인</li><li>설캉스</li><li>쇼핑</li><li>이벤트</li></ul>
@@ -521,6 +535,6 @@
   </nav>
 </div>
 
-<script src="js/main.js?v=18"></script>
+<script src="js/main.js?v=19"></script>
 </body>
 </html>

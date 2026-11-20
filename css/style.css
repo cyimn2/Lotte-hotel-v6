@@ -789,3 +789,15 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .rsv-kw { align-self: flex-start; margin-top: 15px; display: flex; gap: 6px; }
 .rsv-kw li { padding: 12px 16px; border: 1px solid rgba(255,255,255,.1); border-radius: 100px; font-size: 13px; font-weight: 300; line-height: 1; color: rgba(255,255,255,.5); white-space: nowrap; cursor: pointer; transition: border-color .3s, color .3s; }
 .rsv-kw li:hover { border-color: rgba(255,255,255,.35); color: #fff; }
+
+/* ---- V6: dining tab (Figma 184:836) — bodies swap with a blur cross-fade ---- */
+.rsv-tabs.dining .rsv-pill { left: 117px; width: 113px; }
+.rsv-tab:nth-of-type(2) { left: 117px; width: 113px; }
+.rsv-body { transition: opacity .45s ease, filter .45s ease, transform .55s var(--ease); }
+.rsv-body:not(.is-on) { opacity: 0; filter: blur(10px); transform: translateY(14px); pointer-events: none; transition-duration: .3s; }
+.rsv-body.is-on { transition-delay: .18s; }
+.rsv-party .rsv-lbl { position: absolute; top: 39px; }
+.rsv-party .rsv-c { transform: translateX(-50%); }
+.rsv-count { position: absolute; left: 80px; top: 64px; width: 241px; height: 46px; display: flex; align-items: center; justify-content: space-between; }
+.rsv-count span { font-family: "Manuale", serif; font-weight: 300; font-size: 26px; line-height: 1; }
+.is-dining .rsv-promo { margin-top: 51px; }

@@ -297,6 +297,7 @@
   const tabs = rsv.querySelector('.rsv-tabs');
   tabs.querySelectorAll('.rsv-tab').forEach((t, i) => t.addEventListener('click', () => {
     tabs.classList.toggle('dining', i === 1);
+    rsv.querySelectorAll('.rsv-body').forEach((b, k) => { b.classList.toggle('is-on', k === i); b.setAttribute('aria-hidden', k !== i); });
     tabs.querySelectorAll('.rsv-tab').forEach((x, k) => { x.classList.toggle('is-on', k === i); x.setAttribute('aria-selected', k === i); });
   }));
   document.querySelectorAll('.stage [data-go]').forEach(a => a.addEventListener('click', e => {
