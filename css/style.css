@@ -826,3 +826,12 @@ html.is-mobile-root, html.is-mobile-root body { height: auto; overflow: visible;
 .f-go { transition: color .5s var(--ease); }
 .b-btn { isolation: isolate; transition: color .5s var(--ease); }
 .r-btn:focus-visible::before, .b-btn:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+/* V6: hotel-list scroll bar grows on hover so it is easy to grab; drag it or click the track */
+.b-scroll { cursor: pointer; touch-action: none; transition: width .3s var(--ease), left .3s var(--ease), background .3s ease; }
+.b-scroll::before { content: ""; position: absolute; top: -10px; bottom: -10px; left: -14px; right: -14px; }   /* wider hover / grab zone */
+.b-scroll i { transition: width .3s var(--ease), background .3s ease; }
+.b-scroll:hover, .b-scroll.dragging { left: 1420px; width: 8px; background: rgba(0,0,0,.4); }
+.b-scroll:hover i, .b-scroll.dragging i { width: 8px; background: #d8d1c8; }
+.b-scroll.dragging { cursor: grabbing; }
+.b-list { overscroll-behavior: contain; }

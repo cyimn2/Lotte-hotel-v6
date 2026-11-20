@@ -194,10 +194,14 @@
   window.addEventListener('wheel', e => {
     if (isMobile()) return; // mobile = native scroll page
     if (isOpen()) return;
+    // v6: over the hotel list (or its scroll bar) the wheel only scrolls the list — it never turns the page,
+    // not even when the list has reached its top or bottom
     const list = e.target.closest && e.target.closest('.b-list');
-    if (list && list.classList.contains('on') && list.scrollHeight > list.clientHeight + 2) {
-      const atTop = list.scrollTop <= 0, atBottom = list.scrollTop + list.clientHeight >= list.scrollHeight - 1;
-      if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) return; // let the hotel list scroll
+    if (list && list.classList.contains('on') && list.scrollHeight > list.clientHeight + 2) return;
+    if (e.target.closest && e.target.closest('.b-scroll')) {
+      e.preventDefault();
+      const l = activeList(); if (l) l.scrollTop += e.deltaY;
+      return;
     }
     e.preventDefault();
     const now = performance.now();
@@ -223,11 +227,7 @@
     const dy = ty - e.changedTouches[0].clientY;
     const dx = tx - e.changedTouches[0].clientX;
     ty = null;
-    if (tList) {
-      // a swipe inside the hotel list scrolls the list; only page-turn once it hits its end
-      const atTop = tList.scrollTop <= 0, atBottom = tList.scrollTop + tList.clientHeight >= tList.scrollHeight - 1;
-      if ((dy > 0 && !atBottom) || (dy < 0 && !atTop)) return;
-    }
+    if (tList) return;   // v6: a swipe inside the hotel list only scrolls the list
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) && cur >= 4 && cur <= 7) {
       return dx > 0 ? go(Math.min(7, cur + 1)) : go(Math.max(4, cur - 1)); // swipe between brands
     }
@@ -260,6 +260,28 @@
     const max = list.scrollHeight - list.clientHeight;
     thumb.style.top = (30 + (max > 0 ? list.scrollTop / max : 0) * (458 - 36 - 30)) + 'px';
   }));
+  // v6: the bar itself can be dragged, and a click on the track jumps there
+  const bar = document.querySelector('.b-scroll');
+  const TRACK = 458, THUMB = 36, PAD = 30;
+  function activeList() { return lists.find(l => l.classList.contains('on')); }
+  function scrollToBar(clientY, grabOffset) {
+    const l = activeList(); if (!l) return;
+    const r = bar.getBoundingClientRect(), s = r.height / TRACK;          // stage scale
+    const y = (clientY - r.top) / s - grabOffset;                         // thumb top in design px
+    const ratio = Math.min(1, Math.max(0, (y - PAD) / (TRACK - THUMB - PAD)));
+    l.scrollTop = ratio * (l.scrollHeight - l.clientHeight);
+  }
+  let grab = null;
+  bar.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    const r = thumb.getBoundingClientRect(), s = bar.getBoundingClientRect().height / TRACK;
+    grab = e.target === thumb ? (e.clientY - r.top) / s : THUMB / 2;
+    bar.setPointerCapture(e.pointerId); bar.classList.add('dragging');
+    scrollToBar(e.clientY, grab);
+  });
+  bar.addEventListener('pointermove', e => { if (grab !== null) scrollToBar(e.clientY, grab); });
+  const endDrag = () => { grab = null; bar.classList.remove('dragging'); };
+  bar.addEventListener('pointerup', endDrag); bar.addEventListener('pointercancel', endDrag);
   function resetLists() { lists.forEach(l => { if (!l.classList.contains('on')) l.scrollTop = 0; }); thumb.style.top = '30px'; }
 
   // menu (left drawer) & reservation (right drawer) — Figma 183:831
